@@ -1,4 +1,6 @@
 import sqlite3
+import DataNormalizer as dn
+
 
 sql_transaction = []
 
@@ -15,9 +17,10 @@ c = connection.cursor()
 #   dataRow[data]
 def create_table():
     c.execute("""CREATE TABLE RECIPIENT (text_id INT PRIMARY KEY, phone TEXT, type TEXT, subject TEXT, ,body TEXT)""")
-    
-    if __name__ == "__main__":
-        create_table()
+    return
+
+
+
 
 def insert_row():
     c.execute("INSERT INTO RECIPIENT ")
@@ -28,7 +31,19 @@ def insert_row():
 #       for data in dataRow:
 #           Processing here
 def create(normalizedData):
-    return
+	create_table()
+	ins_query = ""
+
+
+
+	for i in normalizedData:
+			# i[dn.PHONE_KEY]
+		phone = str(i[dn.PHONE_KEY])
+		t_ype = str(i[dn.TYPE_KEY])
+		sub = str(i[dn.SUBJECT_KEY])
+		bod = str(i[dn.BODY_VALUE])
+		c.execute("INSERT INTO RECIPIENT VALUES (" + phone + ", " + t_ype + ", " + sub + ", " +  bod + ")")
+	return
     
 def run():
     return
