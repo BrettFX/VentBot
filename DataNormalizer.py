@@ -1,5 +1,11 @@
 import pandas as pd
 
+# Format of normalizedData: [{phoneKey : phoneValue, typeKey : typeValue, subjectKey, subjectValue, bodyKey, bodyValue}, ... ]
+PHONE_KEY = "phoneKey"
+TYPE_KEY = "typeKey"
+SUBJECT_KEY = "subjectKey"
+BODY_KEY = "bodyKey"
+
 def parseCSV(csvPath):
     return
 
