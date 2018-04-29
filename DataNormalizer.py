@@ -1,10 +1,10 @@
 import xml.etree.ElementTree as et
 
 # Format of normalizedData: [{phoneKey : phoneValue, typeKey : typeValue, subjectKey, subjectValue, bodyKey, bodyValue}, ... ]
-PHONE_KEY = "phoneKey"
-TYPE_KEY = "typeKey"
-SUBJECT_KEY = "subjectKey"
-BODY_KEY = "bodyKey"
+PHONE_KEY = "address"
+TYPE_KEY = "type"
+SUBJECT_KEY = "subject"
+BODY_KEY = "body"
 
 TARGET_COLS = "address, type, subject, body"
 
@@ -16,15 +16,15 @@ def parseXML(xmlPath):
 	normalizedData = []
 
 	xmlData = et.parse(xmlPath).getroot()
-	elements = e.findall("sms")
+	elements = xmlData.findall("sms")
     
-    for attributes in elements:
-	    dataRow = {}
-	    for key in attribute.keys():
-	        # Only insert target columns
-	        if key in TARGET_COLS:            
-	            dataRow[key] = attributes.get(key)
+	for attributes in elements:
+		dataRow = {}
+		for key in attributes.keys():
+    		# Only insert target columns
+			if key in TARGET_COLS:            
+				dataRow[key] = attributes.get(key)
 	    
-	    normalizedData.append(dataRow)
+		normalizedData.append(dataRow)
 
-    return normalizedData
+	return normalizedData
