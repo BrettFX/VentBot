@@ -20,11 +20,6 @@ def create_table():
     return
 
 
-
-
-def insert_row():
-    c.execute("INSERT INTO RECIPIENT ")
-    
 # Format of normalizedData: [{phoneKey : phoneValue, typeKey : typeValue, subjectKey, subjectValue, bodyKey, bodyValue}, ... ]
 # Iterate: 
 #   for dataRow in normalizedData:
@@ -43,6 +38,11 @@ def create(normalizedData):
 		sub = str(i[dn.SUBJECT_KEY])
 		bod = str(i[dn.BODY_VALUE])
 		c.execute("INSERT INTO RECIPIENT VALUES (" + phone + ", " + t_ype + ", " + sub + ", " +  bod + ")")
+	return
+
+def show_row(t_id):
+	try
+	c.execute("SELECT * FROM RECIPIENT WHERE text_id = " + t_id + ";")
 	return
     
 def run():
