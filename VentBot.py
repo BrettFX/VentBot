@@ -1,27 +1,19 @@
 # Driver Program
 
-import Database as db
-import DataNormalizer as dn
-import sqlite3
-import pandas as pd
+output_file_location = 'output_dev'
+tst_file_location = 'tst2013.from'
 
-DATA = "./data/Jack_Test1.xml"
+if __name__ == '__main__':
+    with open(output_file_location,"r") as f:
+        content = f.read()
+        to_data = content.split('\n')
 
-normalizedData = dn.parseXML(DATA)
-db.create(normalizedData)
+    with open(tst_file_location,"r") as f:
+        content = f.read()
+        from_data = content.split('\n')
 
-# Let's do some machine lerning!
-connection = sqlite3.connect(db.DATABASE)
-c = connection.cursor()
-to_id = 1 # Only select the recipient
-from_id = 2 # Only select the sender
-textsDataFrameTo = pd.read_sql("SELECT * FROM RECIPIENT WHERE type = " + str(to_id) + ";", connection)
-textsDataFrameFrom = pd.read_sql("SELECT * FROM RECIPIENT WHERE type = " + str(from_id) + ";", connection)
-    
-with open('./nmt-chatbot/new_data/test.from','a', encoding='utf8') as f:
-    for content in textsDataFrameTo["body"].values:
-        f.write(content + '\n')
-
-with open('./nmt-chatbot/new_data/test.to','a', encoding='utf8') as f:
-    for content in textsDataFrameFrom["body"].values:
-        f.write(content  +'\n')
+    for n, _ in enumerate(to_data[:-1]):
+        print(30*'_')
+        print('>',from_data[n])
+        print()
+        print('Reply:',to_data[n])
