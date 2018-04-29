@@ -1,0 +1,145 @@
+Yo, so is arc consistency for a constraint graph when you are able to make the graph so that everything works right. So for the example he gave us in class with the R,G,B graph when their where no nodes connected that shared the same color that was arc consistent.
+Ok, awesome. Thanks man.
+Found this
+I am just really confused about how we are supposed to create a constraint graph of this. Everything else makes sense
+I am guessing this is kind what the constraint graph the queens problem might look like since the queen could be considered the variable. The chess board would be the graph. That is the only way I could visualize it.
+All good, how did the test go? Ya, that is what made most sense to me. Ok, now I am no where near worried about this test.
+Thanks
+Ayy kick ass, just want to make sure. For minmax search do you think he is going to put a rolling dice kinda like in his old test so they pick min then they put the values though variable like 1 side is .25 and the other is .75.
+Then max chooses.
+ok, that should be pretty simple free points
+So when you are going through the search if it finds a path with a lower cost to that node it updates the value. Kind of the same idea as a Unary Cost Search. To me that is basically what A* is just with a heuristic.
+I think I did that right.
+Ohhh, on a side note if you need help getting the graphs to work I can help. I got them to work, but had to fiddle around with the code that he gave us
+Commons 2nd floor near the game room and flat tuesdays
+I might be in bathroom when you get their. I am sitting at the same table as the Asian guy with the maroon shirt.
+Wasn't that bad their was some difficult questions but not that bad.
+Why, what happen?
+Ohhhh, the t/f was confusing at first. Kinda figured it out after a little.
+Not sure didn't download the formula for the hard test. It ran right the first time I uploaded my code to Mimir so I didn't mess with it.
+Text me the formula and I can run it for you.
+lol, that is the graph function. What is the formula for the hard test
+With random restart
+color=(i[3]/longestStep,0,0)
+Also, use something like this for the color. It bases the brightest red off the longest step that the search ever takes
+Otherwise you get a black line
+all good
+you will probably also need to modify the z-axis coordinates or your graph will look really fucked up.
+When I did the function to create the z-axis array I add into the function the ability to mind the lowest and highest point on the graph to create my bounds
+Oh, what are the bounds for the hard test
+When creating the z-array generator I used this.val = my_func(x[i][t], y[i][t])
+            if min == None:
+                min = val
+                max = val
+            if min >= val:
+                min = val
+            if max <= val:
+                max = val
+val = my_func(x[i][t], y[i][t])
+            if min == None:
+                min = val
+                max = val
+            if min >= val:
+                min = val
+            if max <= val:
+                max = val
+Find the min and the max z val
+np.array(zArray)
+You need to use this to create the z-array from all the points
+ya, no problem. I was like what the fuck then I looked back at how they generated the x and y arrays and found they used this np.arange(xmin, xmax, 0.25) so Iooked what they outputted and found they used NP arrays
+literally looks like a dick
+Ya, was literally about to do it. I think the reason their is a hole is because the if statement isn’t in their
+The hole in the middle is 1
+Ya, but their is none, because he coded them out so that it reaches 1 instead of going to infinity
+Got simulated annealing to work it was really hard finding the right start heat and min heat and the speed to cool it, but finally got it to work ever time
+I am actually having better success with a higher Tmin and a slower cooling rate
+It just takes forever to print the graph
+yup
+The only graph that simulated annealing is having a hard time with is the second test graph. I think it is because I don’t have t starting large enough
+I have no clue. Maybe I am not slowing it slow enough or the step size isn't large enough. I am going with that I am not slowing it enough, but it is already taking really long.
+Ya, I am going to a caps game in like an hour, so I probably won't figure it out tonight.
+Let me know what you find out.
+Thanks
+Did you use a different graph equation for the simulated annealing?
+I might just end up using one of the ones he gave us unless their are better ones to use. It is hard to find them online.
+Hard is 0,0 I think and medium is 96, 0.
+What?? All you have to do for random restart is do a hill climbing search find the peak and if the peach is higher then the peak of the last hill climbing search then you mark that point as the new highest point. It does a certain number of restarts that are specified by you so for mine I did a 100 and it succeeded all 3 ever time I ran it.
+Also, I think that simulated annealing is not optimized for test 2
+Oh, ya. The reason for the is because of the way the graph is shaped and the amount of plateaus it has. You basically have to have it land at like 
++/-{5,5}
+I have it at 1 the entire time.
+It isn't variable.
+Mine is really lazy lol.
+Ohhh, I just have it by how Streep the assent is. Lol. Mine is really backwards ass.
+Since I did gradient accent.
+I actually didn't think the step size increments. Might implement that isn't my simulated annealing.
+I tried the variable step size for simulated annealing on number 2. Sadly not helping all that much.
+For your graph either record the largest step the search does or the steepest assent it climbs and set that as the value over in place of the 1000 in i[3]/1000 in the graph function. You just need to add another input variable for it in the inputs for the function.
+good, no not yet check piazza I posted a question their
+ya, that looks right
+Did we have to turn it in today?
+Though it wasn't due till next classist
+ohhhh, yo can you send me the numbers that you used for simulated annealing
+all good man.
+any, thanks man
+You down to meet up with me and Jessie tomorrow. We are going to be in IT tomorrow all day. I am going to try and get their by 10:30, but Jessie will probably get their earlier.
+Ok, no
+No problem.
+Lol
+We are on the third floor of ITE
+Yo, for question one what was your information gain for the split at humidity. I am getting a negative number.
+That is weird. I got -.063. I must have accidentally added .1 somewhere
+Awesome thanks, did you get      .884 for the first one.
+Ya, the fuck. Ok, I am probably doing something really wrong lol.
+So, for example when I was doing the info gain on outlook I was doing the entropy of the outlook - the weighted sum of the entropy of the class(play/not play) for each type of outlook.
+Also, if you do it the entropy for the overcast outlook should be zero.
+I got an entropy of .971 for the other 2.
+Ya, then weighting them by multiplying them by 5/24
+5/14
+To weight them.
+Then add them together. And subtract that value from 1.578
+You have to
+Ohhhhhh, ya you need to do that.
+Ya, I talked to him after class about it to confirm and he said you have to weight it.
+Ya, the formula wasn't even on the hand out
+So hyped, just got the trained tree to work for the project. Took a lot of work, but it is finally done. Just need to get the search to work
+Ya, it look like 7-8 hours. Once you figure it out it will all just click.
+Did you ever see if homework 3 got posted for 436.
+I have been looking for it and can't find it.
+Ya, their is supposed to be one. Paul emailed her. We will find out.
+Did you get the homework for 471 done yet?
+I think I got it but I am not sure.
+I set the weight for 0 to 0 and the weight for 1 to 1 and the threshold is 0
+So if 1 is greater than or equal to zero it is true, but if 0 is less then 0 it is false. It has to be one since 0 always has to be zero.
+I think I am write.
+Right.
+Awesome thanks man.
+You then find the best information gain for the data with each specific output. So say if you split it at sunny you find the best information gain for the data that has an outlook of sunny and then split at that data and keep going. Like a Tree. So if you split at sunny and then the best information gain for the sunny data is the humidity data you then split the sunny data at humidity.
+But raining data can be split at a different column because is it windy has a better information gain for rainy data then humidity.
+Lol, I think I was just really tired last night. Just went through the problem and realized that it was way easier then I originally thought. Just set the weights and the threshold to 1. Since both inputs being 1 outputs 2 it is the only value greater than 1 that can be produced in the perceptron.
+ya, totally. I just think I chose the simplest one lolz
+Ya, same place as last time
+I might be down. Reviewing for a coding challenge for CARFAX right now though. What did you want to go over, because I am a little bit confused on all this stuff as well
+do you have the 436 book?
+I feel like I am so fucked for this exam.
+Ok, thanks man. I am just slowly trying to wrap my head around this Material. You done to meet for the exam and do a short review before.
+Probably 1 or 2 I am going to get up at like 6:30 on Tuesday get a large coffee and just study my ass off. You can come by whenever I will let you know where I am. I am really going to have to be taught a lot of shit lol.
+Awesome thanks
+clutch. So, I am definitely going to be getting up at 6:30ish tomorrow. I am really screwed and am not sure what to study for this test. I will most likely be in the same place I normally am.
+Ya, but I understood the stuff really well last time so it was a lot easier. These topics are way harder to conceptualize. lol
+Oh, good looks. I haven’t even had a chance to look at that lol
+Oh, is this exam cumulative?
+ok, sounds good. I will be here
+just trying to memorize as much as I can lol
+how much about convolutional neural networks do we need to know for the test. I feel like he isn’t going to give a lot because of how confused people were during that lecture
+Awesome thank, I have no clue if he is going to give us a lot from that section. He might lol
+hell ya, if I had an easier time understanding it I would have no problem memorizing it. I am starting to understand how it works, but I feel like if I had to code it up that would be the best way to learn it or if their was a really good video showing how each process works
+I could probably easily code a really simple one where only like 20 hidden layer nodes for each picture.
+ya
+Where are you? I am in the hall outside. Hard af
+the not sure if I did get them right, but I was just guessing hard on the bayes net problem
+Dude the one with the shifting centroid I had no clue about.
+Was the PCA one the one with the different C-constant?
+One you draw a hyper plane splitting the data and the other you ignore the outliers.
+Ya, that is what I was assuming. I just looked at the data and realized that their where 2 outliers so that kinda gave it away for me.
+exactly
