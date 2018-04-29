@@ -3,8 +3,9 @@ import DataNormalizer as dn
 
 
 sql_transaction = []
+TRANS_MAX = 100
 
-connection = sqlite3.connect('{}.db')
+connection = sqlite3.connect('Texts.db')
 
 c = connection.cursor()
 
@@ -39,6 +40,19 @@ def create(normalizedData):
 		bod = str(i[dn.BODY_VALUE])
 		c.execute("INSERT INTO RECIPIENT VALUES (" + phone + ", " + t_ype + ", " + sub + ", " +  bod + ")")
 	return
+
+def transaction_bld(sql):
+	sql_transaction.append(sql)
+	if len(sql_transactionql)  > TRANS_MAX:
+		c.execute("BEGIN TRANSACTION")
+		for i in sql_transaction:
+			try:
+				c.execute(i)
+			except:
+				pass
+		connection.commit()
+		sql_transaction = []
+
 
 def show_row(t_id):
 	try:
