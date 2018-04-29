@@ -4,6 +4,9 @@ import DataNormalizer as dn
 TRANS_MAX = 100
 DATABASE = 'Texts.db'
 
+connection = sqlite3.connect(DATABASE)
+c = connection.cursor()
+
 # Columns: phone, type, subject, body
 # Data Format:
 # dataRow = {phoneKey : phoneValue, typeKey : typeValue, subjectKey, subjectValue, bodyKey, bodyValue}
@@ -33,9 +36,6 @@ def transaction_bld(query, sql_transaction, cursor):
 #       for data in dataRow:
 #           Processing here
 def create(normalizedData):
-	connection = sqlite3.connect(DATABASE)
-	c = connection.cursor()
-
 	sql_transaction = []
 
 	create_table(c)
@@ -57,16 +57,16 @@ def create(normalizedData):
 
 	connection.commit()
 
-def show_row(t_id):
+def show_row(t_id, selector):
 	try:
-		c.execute("SELECT * FROM RECIPIENT WHERE text_id = " + t_id + ";")
+		c.execute("SELECT " + str(selector) + " FROM RECIPIENT WHERE text_id = " + str(t_id) + ";")
 		result = c.fetchone()
 		if result != None:
-			return result[0]
+			return result
 		else: 
-			return False
+			return None
 	except Exception as e:
-		return False
+		return None
     
 def run():
     return
