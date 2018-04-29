@@ -41,9 +41,15 @@ def create(normalizedData):
 	return
 
 def show_row(t_id):
-	try
+	try:
 	c.execute("SELECT * FROM RECIPIENT WHERE text_id = " + t_id + ";")
-	return
+	result = c.fetchone()
+	if result != None:
+		return result[0]
+	else: 
+		return False
+	except Exception as e:
+		return False
     
 def run():
     return
