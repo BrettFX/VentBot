@@ -26,6 +26,8 @@ def parseXML(xmlPath):
 			if key in TARGET_COLS:        
 				value = attributes.get(key)
 
+				# Need to handle encoding errors for emojis by removing the emojis or handling the emojis later on 
+
 				# Replace all quotes and apostrophes with apostrophes 
 				value = re.sub("[\'\"]", "\'", value)    
 				dataRow[key] = value

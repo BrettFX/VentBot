@@ -46,17 +46,17 @@ def create(normalizedData):
 		msgSubject = "\'" + str(i[dn.SUBJECT_KEY]) + "\'"
 		msgBody = "\"" + str(i[dn.BODY_KEY]) + "\""
 
-		# Only parse texts that are in unicode
+		# Only use texts that are completely filtered (don't contain emojis)
 		try:
 			c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format(msgPhone, msgType, msgSubject, msgBody))
 		except UnicodeEncodeError:
-			c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format(msgPhone, msgType, msgSubject, "\'PARSE ERROR\'"))
+			c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format(msgPhone, msgType, msgSubject, "\'ENCODING ERROR\'"))
 
 	connection.commit()
 
-def show_row(t_id, selector):
+def query(t_id, selector):
 	try:
-		c.execute("SELECT " + str(selector) + " FROM RECIPIENT WHERE text_id = " + str(t_id) + ";")
+		c.execute("SELECT " + str(selector) + " FROM RECIPIENT WHERE type = " + str(t_id) + ";")
 		result = c.fetchone()
 		if result != None:
 			return result

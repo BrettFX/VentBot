@@ -7,4 +7,4 @@ DATA = "./data/Jack_Test1.xml"
 
 normalizedData = dn.parseXML(DATA)
 db.create(normalizedData)
-print(db.show_row(1, "body"))
+print(db.query(1, "body"))
