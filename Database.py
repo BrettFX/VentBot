@@ -14,17 +14,17 @@ c = connection.cursor()
 # Access elements in dataRow without known key:
 # for data in dataRow:
 #   dataRow[data]
-def create_table(cursor):
-	cursor.execute("DROP TABLE RECIPIENT;")
-	cursor.execute("CREATE TABLE IF NOT EXISTS RECIPIENT (text_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, phone TEXT, type TEXT, subject TEXT, body BLOB);")
+def create_table():
+	c.execute("DROP TABLE RECIPIENT;")
+	c.execute("CREATE TABLE IF NOT EXISTS RECIPIENT (text_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, phone TEXT, type TEXT, subject TEXT, body BLOB);")
 
-def transaction_bld(query, sql_transaction, cursor):
+def transaction_bld(query, sql_transaction):
 	sql_transaction.append(query)
 	if len(sql_transaction)  > TRANS_MAX:
-		cursor.execute("BEGIN TRANSACTION")
+		c.execute("BEGIN TRANSACTION")
 		for i in sql_transaction:
 			try:
-				cursor.execute(i)
+				c.execute(i)
 			except:
 				pass
 		connection.commit()
@@ -38,7 +38,7 @@ def transaction_bld(query, sql_transaction, cursor):
 def create(normalizedData):
 	sql_transaction = []
 
-	create_table(c)
+	create_table()
 
 	for i in normalizedData:
 		msgPhone = "\'" + str(i[dn.PHONE_KEY]) + "\'"
@@ -47,13 +47,10 @@ def create(normalizedData):
 		msgBody = "\"" + str(i[dn.BODY_KEY]) + "\""
 
 		# Only parse texts that are in unicode
-		try:			
-			# c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format("'4105551234'", "'1'", "'null'", "'Hello, how are you?'"))
+		try:
 			c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format(msgPhone, msgType, msgSubject, msgBody))
-			# transaction_bld("INSERT INTO RECIPIENT VALUES (" + msgPhone + ", " + msgType + ", " + msgSubject + ", " +  msgBody + ")", sql_transaction)
 		except UnicodeEncodeError:
 			c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format(msgPhone, msgType, msgSubject, "\'PARSE ERROR\'"))
-
 
 	connection.commit()
 
