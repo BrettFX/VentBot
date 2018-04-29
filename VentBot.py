@@ -16,6 +16,7 @@ c = connection.cursor()
 t_id = 1 # Only select the recipient
 textsDataFrame = pd.read_sql("SELECT * FROM RECIPIENT WHERE type = " + str(t_id) + ";", connection)
 
+# N-fold cross validation where N = 2
 numTests = int(len(textsDataFrame) / 2)
 numTrains = int(len(textsDataFrame) - numTests)
 
