@@ -1,4 +1,3 @@
-import pandas as pd
 import xml.etree.ElementTree as et
 
 # Format of normalizedData: [{phoneKey : phoneValue, typeKey : typeValue, subjectKey, subjectValue, bodyKey, bodyValue}, ... ]
