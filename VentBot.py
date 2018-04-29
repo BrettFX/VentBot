@@ -5,5 +5,8 @@ import DataNormalizer as dn
 
 DATA = "./data/Jack_Test1.xml"
 
-dn.parseXML(DATA)
+normalizedData = dn.parseXML(DATA)
+db.create(normalizedData)
+print(db.show_row(1))
+
 
