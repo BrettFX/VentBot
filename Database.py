@@ -2,10 +2,7 @@ import sqlite3
 import DataNormalizer as dn
 
 TRANS_MAX = 100
-
-connection = sqlite3.connect('Texts.db')
-
-c = connection.cursor()
+DATABASE = 'Texts.db'
 
 # Columns: phone, type, subject, body
 # Data Format:
@@ -14,18 +11,17 @@ c = connection.cursor()
 # Access elements in dataRow without known key:
 # for data in dataRow:
 #   dataRow[data]
-def create_table():
-	# c.execute("DROP TABLE RECIPIENT;")
-	c.execute("""CREATE TABLE IF NOT EXISTS RECIPIENT (text_id INT PRIMARY KEY, phone TEXT, type TEXT, subject TEXT, body TEXT);""")
-	return
+def create_table(cursor):
+	cursor.execute("DROP TABLE RECIPIENT;")
+	cursor.execute("CREATE TABLE IF NOT EXISTS RECIPIENT (text_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, phone TEXT, type TEXT, subject TEXT, body BLOB);")
 
-def transaction_bld(query, sql_transaction):
+def transaction_bld(query, sql_transaction, cursor):
 	sql_transaction.append(query)
 	if len(sql_transaction)  > TRANS_MAX:
-		c.execute("BEGIN TRANSACTION")
+		cursor.execute("BEGIN TRANSACTION")
 		for i in sql_transaction:
 			try:
-				c.execute(i)
+				cursor.execute(i)
 			except:
 				pass
 		connection.commit()
@@ -37,22 +33,29 @@ def transaction_bld(query, sql_transaction):
 #       for data in dataRow:
 #           Processing here
 def create(normalizedData):
+	connection = sqlite3.connect(DATABASE)
+	c = connection.cursor()
+
 	sql_transaction = []
-	create_table()
+
+	create_table(c)
 
 	for i in normalizedData:
-			# i[dn.PHONE_KEY]
-		phone = str(i[dn.PHONE_KEY])
-		t_ype = str(i[dn.TYPE_KEY])
-		sub = str(i[dn.SUBJECT_KEY])
-		bod = str(i[dn.BODY_KEY])
+		msgPhone = "\'" + str(i[dn.PHONE_KEY]) + "\'"
+		msgType = "\'" + str(i[dn.TYPE_KEY]) + "\'"
+		msgSubject = "\'" + str(i[dn.SUBJECT_KEY]) + "\'"
+		msgBody = "\"" + str(i[dn.BODY_KEY]) + "\""
 
-		c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format(phone, t_ype, sub, bod))
-		# transaction_bld("INSERT INTO RECIPIENT VALUES (" + phone + ", " + t_ype + ", " + sub + ", " +  bod + ")", sql_transaction)
-	return
+		# Only parse texts that are in unicode
+		try:			
+			# c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format("'4105551234'", "'1'", "'null'", "'Hello, how are you?'"))
+			c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format(msgPhone, msgType, msgSubject, msgBody))
+			# transaction_bld("INSERT INTO RECIPIENT VALUES (" + msgPhone + ", " + msgType + ", " + msgSubject + ", " +  msgBody + ")", sql_transaction)
+		except UnicodeEncodeError:
+			c.execute("INSERT INTO RECIPIENT (phone, type, subject, body) VALUES ({}, {}, {}, {})".format(msgPhone, msgType, msgSubject, "\'PARSE ERROR\'"))
 
 
-
+	connection.commit()
 
 def show_row(t_id):
 	try:

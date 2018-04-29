@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as et
+import re
 
 # Format of normalizedData: [{phoneKey : phoneValue, typeKey : typeValue, subjectKey, subjectValue, bodyKey, bodyValue}, ... ]
 PHONE_KEY = "address"
@@ -22,8 +23,12 @@ def parseXML(xmlPath):
 		dataRow = {}
 		for key in attributes.keys():
     		# Only insert target columns
-			if key in TARGET_COLS:            
-				dataRow[key] = attributes.get(key)
+			if key in TARGET_COLS:        
+				value = attributes.get(key)
+
+				# Replace all quotes and apostrophes with apostrophes 
+				value = re.sub("[\'\"]", "\'", value)    
+				dataRow[key] = value
 	    
 		normalizedData.append(dataRow)
 
